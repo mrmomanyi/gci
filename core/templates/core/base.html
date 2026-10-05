@@ -1,0 +1,46 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ SITE_NAME }}: {{ SITE_TAGLINE }}.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'core/css/site.css' %}">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="{% url 'home' %}">
+        {% include "core/partials/mark.html" %}
+        <span>{{ SITE_NAME }}</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>About</a>
+        <a href="{% url 'journey' %}" {% if 'journey' in request.resolver_match.url_name %}aria-current="page"{% endif %}>Our journey</a>
+        <a class="btn small" href="{% url 'contact' %}">Contact us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="wrap foot">
+      <div>
+        <strong>{{ SITE_NAME }}</strong>
+        <p>{{ SITE_TAGLINE }}.</p>
+      </div>
+      <div>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'journey' %}">Our journey</a>
+        <a href="{% url 'contact' %}">Contact us</a>
+      </div>
+    </div>
+    <div class="wrap legal">&copy; {% now "Y" %} {{ SITE_NAME }}</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>{{ SITE_TAGLINE }}.</h1>
+      <p class="lead">We back young people who turn climate ideas into projects that work, and we share what we learn along the way.</p>
+      <p class="actions">
+        <a class="btn" href="{% url 'journey' %}">Follow our journey</a>
+        <a class="btn ghost" href="{% url 'contact' %}">Work with us</a>
+      </p>
+    </div>
+    <div class="hero-mark">{% include "core/partials/mark.html" %}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>What we do</h2>
+    <div class="cols">
+      <div>
+        <h3>Find ideas early</h3>
+        <p>We look for young climate innovators with promising ideas, before the ideas have found their funding or their audience.</p>
+      </div>
+      <div>
+        <h3>Help them grow</h3>
+        <p>We connect innovators with mentors, practical support and the people who can help a project take root.</p>
+      </div>
+      <div>
+        <h3>Share the story</h3>
+        <p>We document each step in the open, so others can learn from what worked and what did not.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="head-row">
+      <h2>Latest from our journey</h2>
+      <a href="{% url 'journey' %}">See everything</a>
+    </div>
+    {% if latest %}
+    <ul class="entries">
+      {% for e in latest %}
+      <li>
+        <time datetime="{{ e.date|date:'Y-m-d' }}">{{ e.date|date:"j M Y" }}</time>
+        <div>
+          <h3><a href="{{ e.get_absolute_url }}">{{ e.title }}</a></h3>
+          <p>{{ e.summary }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">No entries yet. Add your first milestone in the admin at /admin/ and it will appear here.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap cta">
+    <h2>Have a climate idea, or want to support one?</h2>
+    <a class="btn" href="{% url 'contact' %}">Get in touch</a>
+  </div>
+</section>
+{% endblock %}

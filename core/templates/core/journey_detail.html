@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}{{ entry.title }} | {{ SITE_NAME }}{% endblock %}
+{% block description %}{{ entry.summary }}{% endblock %}
+{% block content %}
+<article class="section"><div class="wrap narrow">
+  <p><a href="{% url 'journey' %}">Back to our journey</a></p>
+  <time class="when" datetime="{{ entry.date|date:'Y-m-d' }}">{{ entry.date|date:"j F Y" }}</time>
+  <h1>{{ entry.title }}</h1>
+  <p class="lead">{{ entry.summary }}</p>
+  <div class="prose">{{ entry.body|linebreaks }}</div>
+</div></article>
+{% endblock %}

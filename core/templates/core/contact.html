@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block title %}Contact us | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="section page-head"><div class="wrap narrow">
+  <h1>Contact us</h1>
+  <p class="lead">Tell us about your idea, your organization or how you would like to help.</p>
+</div></section>
+<section class="section"><div class="wrap narrow">
+  <form method="post" class="form" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="hp" aria-hidden="true">{{ form.website.label_tag }} {{ form.website }}</div>
+    {% for f in form.visible_fields %}{% if f.name != "website" %}
+    <div class="field">
+      {{ f.label_tag }}
+      {{ f }}
+      {% for err in f.errors %}<p class="error">{{ err }}</p>{% endfor %}
+    </div>
+    {% endif %}{% endfor %}
+    <button class="btn" type="submit">Send message</button>
+  </form>
+</div></section>
+{% endblock %}

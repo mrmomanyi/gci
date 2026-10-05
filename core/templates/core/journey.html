@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+{% block title %}Our journey | {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="section page-head"><div class="wrap narrow">
+  <h1>Our journey</h1>
+  <p class="lead">Milestones, lessons and updates, newest first.</p>
+</div></section>
+<section class="section"><div class="wrap narrow">
+  {% if entries %}
+  <ol class="timeline">
+    {% for e in entries %}
+    <li>
+      <time datetime="{{ e.date|date:'Y-m-d' }}">{{ e.date|date:"j M Y" }}</time>
+      <h2><a href="{{ e.get_absolute_url }}">{{ e.title }}</a></h2>
+      <p>{{ e.summary }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p class="empty">No entries yet. Sign in at /admin/ and add your first journey entry.</p>
+  {% endif %}
+</div></section>
+{% endblock %}
